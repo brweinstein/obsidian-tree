@@ -35,15 +35,22 @@ Prerequisites
 - npm (or yarn/pnpm)
 ## Get Started
 ### Clone locally
-git clone https://github.com/<your-username>/obsidian-tree-navigator.git
+```
+git clone https://github.com/brweinstein/obsidian-tree.git
 cd obsidian-tree-navigator
-
+```
 ### Install dependencies
+```
 npm install
+```
 
 ### Build the plugin bundle
+```
 npm run build
-
+```
 ### Watch for changes (optional)
+```
 npm run dev
+```
+
 After building, the output files main.js and styles.css will appear in the root. Link this folder into your vault’s plugins directory for testing.

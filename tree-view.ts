@@ -258,12 +258,17 @@ export class TreeView extends ItemView {
     if (!name) return;
 
     if (name.endsWith("/")) {
+      // Folder
       await this.app.vault.createFolder(`${parentPath}/${name.slice(0, -1)}`);
     } else {
-      await this.app.vault.create(`${parentPath}/${name}`, "");
+      // File: ensure a .md extension
+      const fileName = name.includes(".")
+        ? name
+        : `${name}.md`;
+      await this.app.vault.create(`${parentPath}/${fileName}`, "");
     }
-    await this.refresh();
-  }
+      await this.refresh();
+    }
 
   private async deletePrompt() {
     const node = this.nodes[this.selectedIndex];
