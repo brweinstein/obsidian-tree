@@ -3,7 +3,7 @@
   align-items: center;
   cursor: default;
   user-select: none;
-  padding: 0.2em 0.4em;
+  padding: 0.4em 0.4em;
   line-height: 1.4;
 }
 
@@ -31,7 +31,7 @@
 /* ——— Folder vs. File Icons ——— */
 .tree-item.folder .tree-icon.mod-folder::before {
   content: var(--icon-folder);
-  font-size: 1.8em;       /* increase as needed */
+  font-size: 2em;       /* increase as needed */
   line-height: 1;         /* keep icons vertically centered */
   margin-right: 0.6rem;   /* tweak spacing between icon and label */
 }
@@ -44,6 +44,8 @@
 
 /* ——— Selected‐Item Highlight ——— */
 .tree-item.selected-tree-item {
-  background-color: var(--interactive-accent);
+  background-color: rgba(var(--interactive-accent-rgb), 0.3); /* 0.3 = 30% opacity */
   color: var(--text-on-accent);
+  border-radius: 8px; /* Adjust the value for more or less rounding */
+  padding: 4px 8px;   /* Optional: adds spacing inside the element */
 }
