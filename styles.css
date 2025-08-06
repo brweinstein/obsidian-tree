@@ -1,0 +1,50 @@
+/* ——— Base Row Styling ——— */
+.tree-item {
+  display: flex;
+  align-items: center;
+  cursor: default;
+  user-select: none;
+  padding: 0.2em 0.4em;
+  line-height: 1.4;
+}
+
+/* ——— Collapse/Expand Arrow Holder ——— */
+.tree-item.folder .nav-folder-collapse-icon {
+  width: 1em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.3em;
+  color: var(--text-normal);
+  /* ensure pseudo-element can render */
+  font-size: 0.8em;
+}
+
+/* ——— Arrow Glyphs ——— */
+.tree-item.folder.collapsed .nav-folder-collapse-icon::before {
+  content: "▸";
+}
+
+.tree-item.folder.expanded .nav-folder-collapse-icon::before {
+  content: "▾";
+}
+
+/* ——— Folder vs. File Icons ——— */
+.tree-item.folder .tree-icon.mod-folder::before {
+  content: var(--icon-folder);
+  font-size: 1.8em;       /* increase as needed */
+  line-height: 1;         /* keep icons vertically centered */
+  margin-right: 0.6rem;   /* tweak spacing between icon and label */
+}
+
+
+.tree-item.file .tree-icon.mod-document::before {
+  content: var(--icon-document);
+  margin-right: 0.5rem;
+}
+
+/* ——— Selected‐Item Highlight ——— */
+.tree-item.selected-tree-item {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
