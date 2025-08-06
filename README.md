@@ -1,6 +1,9 @@
 # Tree Navigator
 A lightweight Obsidian plugin that adds a dedicated, keyboard-navigable tree view of your vault. Expand, collapse, and open folders and files without touching the mouse.
 
+## Demo
+![Usage](./obsidian_tree_demo.gif)
+
 ## Features
 - Persistent tree-view panel
 - Keyboard navigation (j/k to move, Enter to expand/collapse or open)

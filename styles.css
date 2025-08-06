@@ -1,6 +1,5 @@
 /* ——— Base Row Styling ——— */
 .tree-item {
-  display: flex;
   align-items: center;
   cursor: default;
   user-select: none;
@@ -17,7 +16,7 @@
   margin-right: 0.3em;
   color: var(--text-normal);
   /* ensure pseudo-element can render */
-  font-size: 0.8em;
+  font-size: 1.2em;
 }
 
 /* ——— Arrow Glyphs ——— */
