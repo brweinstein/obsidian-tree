@@ -1,21 +1,18 @@
-# Visual Studio Code  
+# Visual Studio Code
 .vscode/
 
-# IntelliJ IDEA  
-*.iml  
+# IntelliJ IDEA
+*.iml
 .idea/
 
-# Node.js dependencies  
+# Node.js dependencies
 node_modules/
 
-# Exclude compiled plugin bundle  
-main.js
-
-# Exclude source maps  
+# Exclude source maps
 *.map
 
-# Obsidian workspace data  
+# Obsidian workspace data
 data.json
 
-# macOS Finder View States  
+# macOS Finder View States
 .DS_Store

@@ -36,6 +36,7 @@ Manual Install
 Prerequisites
 - Node.js ≥14
 - npm (or yarn/pnpm)
+
 ## Get Started
 ### Clone locally
 ```
@@ -57,3 +58,6 @@ npm run dev
 ```
 
 After building, the output files main.js and styles.css will appear in the root. Link this folder into your vault’s plugins directory for testing.
+
+## License
+MIT
