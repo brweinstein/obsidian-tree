@@ -1,13 +1,10 @@
 {
   "id": "tree-navigator",
-  "manifestVersion": 1,
   "name": "Tree Navigator",
   "version": "1.0.1",
   "minAppVersion": "0.15.0",
   "description": "Keyboard-first file explorer like nvim-tree.",
   "author": "bw",
-  "authorUrl": "",
+  "authorUrl": "https://github.com/brweinstein",
   "isDesktopOnly": false,
-  "main": "main.js",
-  "css": "styles.css"
 }
