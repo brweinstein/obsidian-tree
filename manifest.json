@@ -1,11 +1,13 @@
 {
-  "id": "obsidian-tree",
+  "id": "tree-navigator",
+  "manifestVersion": 1,
   "name": "Tree Navigator",
   "version": "1.0.1",
   "minAppVersion": "0.15.0",
   "description": "Keyboard-first file explorer like nvim-tree.",
   "author": "bw",
   "authorUrl": "",
+  "isDesktopOnly": false,
   "main": "main.js",
   "css": "styles.css"
 }
