@@ -1,10 +1,29 @@
-/* ——— Base Row Styling ——— */
+/* styles.css */
+
+/* ——— Depth-based Indentation ——— */
+.tree-item.depth-0 { padding-left: 0; }
+.tree-item.depth-1 { padding-left: 0.5rem; }
+.tree-item.depth-2 { padding-left: 1rem; }
+.tree-item.depth-3 { padding-left: 1.5rem; }
+.tree-item.depth-4 { padding-left: 2rem; }
+.tree-item.depth-5 { padding-left: 2.5rem; }
+.tree-item.depth-6 { padding-left: 3rem; }
+.tree-item.depth-7 { padding-left: 3.5rem; }
+.tree-item.depth-8 { padding-left: 4rem; }
+.tree-item.depth-9 { padding-left: 4.5rem; }
+.tree-item.depth-10 { padding-left: 5rem; }
+
+/* ——— Base Row Styling & Connector Context ——— */
 .tree-item {
+  position: relative;
+  z-index: 1;
+  display: flex;
   align-items: center;
   cursor: default;
   user-select: none;
-  padding: 0.4em 0.4em;
-  line-height: 1.4;
+  padding: 0.25em 0.4em;
+  line-height: 1.2;
+  transition: background-color 0.1s ease;
 }
 
 /* ——— Collapse/Expand Arrow Holder ——— */
@@ -13,9 +32,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-right: 0.3em;
+  margin-right: 0.4rem;
   color: var(--text-normal);
-  /* ensure pseudo-element can render */
   font-size: 1.2em;
 }
 
@@ -28,24 +46,55 @@
   content: "▾";
 }
 
+.tree-item:hover .nav-folder-collapse-icon {
+  color: var(--interactive-accent);
+}
+
 /* ——— Folder vs. File Icons ——— */
 .tree-item.folder .tree-icon.mod-folder::before {
   content: var(--icon-folder);
-  font-size: 2em;       /* increase as needed */
-  line-height: 1;         /* keep icons vertically centered */
-  margin-right: 0.6rem;   /* tweak spacing between icon and label */
+  font-size: 1em;
+  margin-right: 0.75rem;
 }
-
 
 .tree-item.file .tree-icon.mod-document::before {
   content: var(--icon-document);
+  font-size: 0.9em;
   margin-right: 0.5rem;
 }
 
-/* ——— Selected‐Item Highlight ——— */
-.tree-item.selected-tree-item {
-  background-color: rgba(var(--interactive-accent-rgb), 0.3); /* 0.3 = 30% opacity */
-  color: var(--text-on-accent);
-  border-radius: 8px; /* Adjust the value for more or less rounding */
-  padding: 4px 8px;   /* Optional: adds spacing inside the element */
+/* ——— Hover Highlight ——— */
+.tree-item:hover {
+  background-color: var(--background-modifier-hover);
 }
+
+/* ——— Selected-Item Highlight ——— */
+.tree-item.selected-tree-item {
+  border-left: 4px solid var(--interactive-accent);
+  background-color: var(--background-modifier-hover);
+}
+
+/* ——— Prompt Input Styling ——— */
+.tree-text-input {
+  width: 100%;
+}
+
+:root {
+  --icon-tree-navigator: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext x='12' y='20' text-anchor='middle' font-family='JetBrainsMonoNF' font-size='24' fill='%23808180'%3Etn%3C/text%3E%3C/svg%3E");
+}
+
+.workspace-tab-header[aria-label="Tree Navigator"] .svg-icon.lucide-file {
+  display: none;
+}
+
+.workspace-tab-header[aria-label="Tree Navigator"] .workspace-tab-header-inner-icon::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: var(--icon-tree-navigator);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+

@@ -101,7 +101,6 @@ export class TreeView extends ItemView {
       }
     };
 
-    // Start by iterating over root's children, skipping the vault-root entry:
     root.children
       .sort((a, b) => {
         if (a instanceof TFolder && b instanceof TFile) return -1;
@@ -122,9 +121,8 @@ export class TreeView extends ItemView {
 
     this.nodes.forEach((node, idx) => {
       const isFolder = node.file instanceof TFolder;
-      const wrapper = this.container.createDiv(`tree-item ${isFolder ? "folder" : "file"}`);
+      const wrapper = this.container.createDiv(`tree-item ${isFolder ? "folder" : "file"} depth-${node.depth}`);
       node.domEl = wrapper;
-      wrapper.style.paddingLeft = `${node.depth * 1}rem`;
 
       if (isFolder) {
         wrapper.toggleClass("expanded", node.expanded);
@@ -171,8 +169,6 @@ export class TreeView extends ItemView {
       case "l":
       case "o":
       case "Enter":
-        this.collapseOrExpand();
-        break;
       case "h":
         this.collapseOrExpand();
         break;
@@ -205,9 +201,6 @@ export class TreeView extends ItemView {
     this.render();
   }
 
-  /**
-   * Collapse this folder and all of its descendant folders.
-   */
   private collapseRecursively(folder: TFolder) {
     this.expandedMap.set(folder.path, false);
     folder.children.forEach((child) => {
@@ -217,31 +210,22 @@ export class TreeView extends ItemView {
     });
   }
 
-  /**
-   * Toggle expand/collapse on folders (collapsing recursively)
-   * or open files.
-   */
   private async collapseOrExpand() {
     const node = this.nodes[this.selectedIndex];
 
-    // Folder → expand or collapse
     if (node.file instanceof TFolder) {
       const path = node.file.path;
       const isExpanded = this.expandedMap.get(path) ?? false;
 
       if (isExpanded) {
-        // Collapse this folder and all descendants
         this.collapseRecursively(node.file);
       } else {
-        // Only expand this one
         this.expandedMap.set(path, true);
       }
 
       await this.buildTree();
       this.render();
-    }
-    // File → open it
-    else {
+    } else {
       await this.app.workspace.openLinkText(node.file.path, "", false);
     }
   }
@@ -253,22 +237,17 @@ export class TreeView extends ItemView {
         ? node.file.path
         : node.file.parent?.path ?? "";
 
-    const name = await new TextPromptModal(this.app, "New file/folder name")
-      .openAndGetValue();
+    const name = await new TextPromptModal(this.app, "New file/folder name").openAndGetValue();
     if (!name) return;
 
     if (name.endsWith("/")) {
-      // Folder
       await this.app.vault.createFolder(`${parentPath}/${name.slice(0, -1)}`);
     } else {
-      // File: ensure a .md extension
-      const fileName = name.includes(".")
-        ? name
-        : `${name}.md`;
+      const fileName = name.includes(".") ? name : `${name}.md`;
       await this.app.vault.create(`${parentPath}/${fileName}`, "");
     }
-      await this.refresh();
-    }
+    await this.refresh();
+  }
 
   private async deletePrompt() {
     const node = this.nodes[this.selectedIndex];
@@ -278,7 +257,8 @@ export class TreeView extends ItemView {
     ).openAndGetValue();
     if (!confirmed) return;
 
-    await this.app.vault.delete(node.file);
+    // Use user‐preferred trash instead of hard delete
+    await this.app.fileManager.trashFile(node.file);
     this.selectedIndex = Math.max(0, this.selectedIndex - 1);
     await this.refresh();
   }
@@ -319,7 +299,7 @@ class TextPromptModal extends Modal {
 
     const input = contentEl.createEl("input", { type: "text" });
     input.value = this.initial;
-    input.style.width = "100%";
+    input.addClass("tree-text-input");
     input.focus();
 
     input.onkeydown = (e) => {
